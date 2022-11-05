@@ -55,6 +55,9 @@ function recorrerAPI() {
                 if (clima.hourly.time[idx] == fechaActual) {
                     // Formateo
                     let fechaActual = new Date();
+                    
+                    // OJO ACA
+                    // Falta la impresión de todos los datos
                     let horaActual = moment(fechaActual).format('HH:mm');
                     
                     // Impresion
