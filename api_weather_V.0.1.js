@@ -19,27 +19,32 @@ function listado(idx, hora, temp, precip) {
             <td>${precip}</td>
         </tr>
     `;
-    // return fila;
+    return fila;
 }
 
 // Obtiene la hora actual. 
 // Formatea al mismo formato fecha de la API
 // Filtra la hora de la API que coincida con la hora actual
 // Muestra la data referente a la hora actual
+var fechaActual = new Date();
+fechaActual = moment(fechaActual).format('YYYY-MM-DD\THH:00');
+// console.log(fechaActual);
+
 function imprimirActual() {
     fetch(apiWeather)
     .then(response => response.json()) 
     .then(clima => {
-        var fechaActual = new Date();
-        fechaActual = moment(fechaActual).format('YYYY-MM-DD\THH:mm');
-        // console.log(fechaActual);
-        let horaActual = clima.hourly.time.filter(fechaActualAPI => fechaActualAPI == fechaActual);
-        horaActual = moment(horaActual).format('HH:mm');
+        let fechaActualAPI = clima.hourly.time.filter(fechaActualAPI => fechaActualAPI == fechaActual);
+        console.log(fechaActualAPI);
+        let horaActual = moment(fechaActualAPI).format('MM-DD HH:mm');
+        console.log(horaActual);
         let tempActual = clima.hourly.apparent_temperature.shift();
         let precipActual = clima.hourly.precipitation.shift();
+        // console.log(horaActual, tempActual, precipActual);
         climaActual.innerHTML += listado(0, horaActual, tempActual, precipActual);
     });
 }
+
 
 // Imprime solo los datos posteriores a la hora y fecha actual
 function imprimirPosteriores() {
@@ -47,15 +52,39 @@ function imprimirPosteriores() {
     .then(response => response.json()) 
     .then(clima => { 
         clima.hourly.time.forEach((dato, idx) => {
-            if (clima.hourly.time > fechaActual) {
+            if (clima.hourly.time[idx] > fechaActual) {
                 let horaPost = clima.hourly.time.shift();
+                horaPost = moment(horaPost).format('MM-DD HH:mm');
                 let tempPost = clima.hourly.apparent_temperature.shift();
                 let precipPost = clima.hourly.precipitation.shift();
+                // console.log(idx, horaPost, tempPost, precipPost);
                 climasPosteriores.innerHTML += listado(idx, horaPost, tempPost, precipPost); 
             }
         });
     });
 }
+
+
+
+/////////////////////////////////////////////
+// Todo junto
+
+function recorrerAPI() {
+    fetch(apiWeather)
+    .then(response => response.json()) 
+    .then(clima => {
+        let fechaActualAPI = clima.hourly.time.filter(fechaActualAPI => fechaActualAPI == fechaActual);
+        console.log(fechaActualAPI);
+        let horaActual = moment(fechaActualAPI).format('MM-DD HH:mm');
+        console.log(horaActual);
+        let tempActual = clima.hourly.apparent_temperature.shift();
+        let precipActual = clima.hourly.precipitation.shift();
+        // console.log(horaActual, tempActual, precipActual);
+        climaActual.innerHTML += listado(0, horaActual, tempActual, precipActual);
+    });
+}
+
+
 
 // Llamado a funciones
 imprimirActual();
