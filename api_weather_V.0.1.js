@@ -28,13 +28,18 @@ function recorrerAPI() {
     .then(clima => {
         clima.hourly.time.forEach((dato, idx) => {
             if (clima.hourly.time[idx] >= fechaActual) {
-                    let fechaActualAPI = clima.hourly.time[idx];
-                    // let horaActual = moment(fechaActualAPI).format('MM-DD HH:mm');
-                    let tempActualAPI = clima.hourly.apparent_temperature[idx];
-                    let precipActualAPI = clima.hourly.precipitation[idx];
+                // Obtener los datos útiles de la consulta
+                let fechaConsulta = clima.hourly.time[idx];
+                let tempConsulta = clima.hourly.apparent_temperature[idx];
+                let precipConsulta = clima.hourly.precipitation[idx];
+                
+                // Formatearlos para la vista
+                let horaActual = moment(fechaActual).format('HH:mm');
+                fechaConsulta = moment(fechaConsulta).format('MM-DD HH:mm');
+
                 // 1° caso
-                if (clima.hourly.time[idx] == fechaActual) climaActual.innerHTML += imprimir(0, fechaActualAPI, tempActualAPI, precipActualAPI);
-                else climasPosteriores.innerHTML += imprimir(0, fechaActualAPI, tempActualAPI, precipActualAPI);
+                if (clima.hourly.time[idx] == fechaActual) climaActual.innerHTML += imprimir(0, horaActual, tempConsulta, precipConsulta);
+                else climasPosteriores.innerHTML += imprimir(idx, fechaConsulta, tempConsulta, precipConsulta);
             }
         }) 
     });
