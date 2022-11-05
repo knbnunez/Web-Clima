@@ -50,8 +50,6 @@ function formatearPrecipitacion(precipitacion) {
 
 function mismoDia(fecha) {
     let dia = moment(fecha).format('MM-DD');
-    // if (dia == diaActual) return 1
-    // else return -1;
     return (dia == diaActual? true: false);
 }
 
@@ -64,6 +62,8 @@ function consultaAPI() {
     fetch(apiWeather)
     .then(response => response.json()) 
     .then(clima => {
+        let posteriores = [];
+        // Imprimir actuales
         clima.hourly.time.forEach((fecha, idx) => {
             if (clima.hourly.time[idx] >= fechaActual) {
                 // Obtener los datos útiles de la consulta
@@ -80,12 +80,43 @@ function consultaAPI() {
                 // Impresión de resutlados
                 if (fecha == fechaActual) climaActual.innerHTML += imprimir(0, horaActual, temperaturaAmbiente, sensacionTermica, precipitacionFormatted, velocidadViento);
                 else if (mismoDia(fecha) == true) climaHorasPosteriores.innerHTML += imprimir(idx, fechaFormatted, temperaturaAmbiente, sensacionTermica, precipitacionFormatted, velocidadViento);
-                else if (/* Es una fecha posterior, imprimir una sola vez el promedio de valores del clima */) {
-                    // let climaPosterior = Posteriores();
-                    climaDiasPosteriores.innerHTML += imprimir(idx, climaPosterior[0], climaPosterior[1], climaPosterior[2], climaPosterior[3], climaPosterior[4]);    
+                else {
+                    diaPosterior = {
+                        time: clima.hourly.time[idx],
+                        temperature_2m: clima.hourly.temperature_2m[idx],
+                        apparent_temperature: clima.hourly.apparent_temperature[idx],
+                        precipitation: clima.hourly.precipitation[idx],
+                        windspeed_10m: clima.hourly.windspeed_10m[idx]
+                    }
+                    posteriores.push(diaPosterior);
                 }
             }
         }) 
+
+        // Imprimir posteriores
+        for (let i = 0; i < 6; i++) {
+            let fecha = "";
+            let avgTemperaturaAmbiente = new Number();
+            let avgSensacionTermica = new Number();
+            let avgPrecipitacion = new Number();
+            let avgVelocidadViento = new Number();
+            for (let j = 0; j < 24; j++) {
+                let dataHora = posteriores.shift();
+                avgTemperaturaAmbiente += dataHora.temperature_2m;
+                avgSensacionTermica += dataHora.apparent_temperature;
+                avgPrecipitacion += dataHora.precipitation;
+                avgVelocidadViento += dataHora.windspeed_10m;
+                if (j == 23) {
+                    var dia = moment(dataHora.time).format('MM-DD');
+                    avgTemperaturaAmbiente = (avgTemperaturaAmbiente/24).toFixed(2);
+                    avgSensacionTermica =  (avgSensacionTermica/24).toFixed(2);
+                    avgPrecipitacion =  (avgPrecipitacion/24).toFixed(2);
+                    avgVelocidadViento =  (avgVelocidadViento/24).toFixed(2);
+                }
+            }
+            climaDiasPosteriores.innerHTML += imprimir(i, dia, avgTemperaturaAmbiente, avgSensacionTermica, avgPrecipitacion, avgVelocidadViento);    
+        }
+        
     });
 }
 
