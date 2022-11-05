@@ -7,63 +7,83 @@ fetch(apiWeather)
         console.log(json);
     });
 
-function imprimir(idx, hora, temp, precip) {
+function imprimir(idx, fecha, temperaturaAmbiente, sensacionTermica, precipitacion, velocidadViento) {
     let fila = `
-        <tr class="filaTabla">              <!-- Puedo agregarle CSS a ésta clase de acá -->
-            <th scope="row">${idx}</th>
-            <td>${hora}</td>
-            <td>${temp}</td>
-            <td>${precip}</td>
+        <!-- Podemos agregarle CSS -->
+        <tr class="filaTabla">          
+            <th scope="row">${idx}      </th>
+            <td>${fecha}                </td>
+            <td>${temperaturaAmbiente}  </td>
+            <td>${sensacionTermica}     </td>
+            <td>${precipitacion}        </td>
+            <td>${velocidadViento}      </td>
         </tr>
     `;
     return fila;
 }
 
-function formatearPrecipitacion(precipConsulta) {
-    if (precipConsulta < 2) return "lluvias débiles";
-    else if (precipConsulta <= 15) return "lluvia";
-    else if (precipConsulta <= 30) return "lluvias fuertes"; 
-    else if (precipConsulta <= 60) return "lluvias muy fuertes";
+function formatearPrecipitacion(precipitacion) {
+    if (precipitacion == 0) return "despejado";
+    else if (precipitacion < 2) return "lluvias débiles";
+    else if (precipitacion <= 15) return "lluvia";
+    else if (precipitacion <= 30) return "lluvias fuertes"; 
+    else if (precipitacion <= 60) return "lluvias muy fuertes";
     else return "lluvias torrenciales";
+    // + Ícono de referencia
 }
 
+// function obtenerFechaActual() {
+    let fechaOrigen = new Date();
+    fechaActual = moment(fechaOrigen).format('YYYY-MM-DD\THH:00');
+    //
+    let diaActual = moment(fechaOrigen).format('MM-DD');
+    let horaActual = moment(fechaOrigen).format('HH:mm');
 
-var fechaActual = new Date();
-fechaActual = moment(fechaActual).format('YYYY-MM-DD\THH:00');
+//     let horasDiaActual = [];
+//     horasDiaActual.forEach(data => {
+//         if ()
+//         horasDiaActual.push(moment(fechaActual).format('MM-DD HH:mm'));
+//     }) 
+    
+// }
+    
 
-function recorrerAPI() {
+function mismoDia(fecha) {
+    let dia = moment(fecha).format('MM-DD');
+    // if (dia == diaActual) return 1
+    // else return -1;
+    return (dia == diaActual? true: false);
+}
+
+function posteriores() {
+    
+    return posteriores;
+}
+
+function consultaAPI() {
     fetch(apiWeather)
     .then(response => response.json()) 
     .then(clima => {
-        clima.hourly.time.forEach((dato, idx) => {
+        clima.hourly.time.forEach((fecha, idx) => {
             if (clima.hourly.time[idx] >= fechaActual) {
                 // Obtener los datos útiles de la consulta
-                let fechaConsulta = clima.hourly.time[idx];
-                // Esta es la sesación térmica
-                let sensacionTConsulta = clima.hourly.apparent_temperature[idx];
-                let precipConsulta = clima.hourly.precipitation[idx];
-                // Falta velocidad del viento
-                let velovidadVConsulta = clima.hourly.windspeed_10m[idx];
-                // Falta la temperatura ambiente
-                let temperaturaAConsulta = clima.hourly.temperature_2m[idx];
-
+                // let fecha = clima.hourly.time[idx];
+                let temperaturaAmbiente = clima.hourly.temperature_2m[idx];
+                let sensacionTermica = clima.hourly.apparent_temperature[idx];
+                let precipitacion = clima.hourly.precipitation[idx];
+                let velocidadViento = clima.hourly.windspeed_10m[idx];
+                
                 // Formatearlos para la vista
-                fechaConsulta = moment(fechaConsulta).format('MM-DD HH:mm');
-                precipitacion = formatearPrecipitacion(precipConsulta);
+                let fechaFormatted = moment(fecha).format('MM-DD HH:mm');
+                let precipitacionFormatted = formatearPrecipitacion(precipitacion);
 
-                // 1° caso
-                if (clima.hourly.time[idx] == fechaActual) {
-                    // Formateo
-                    let fechaActual = new Date();
-                    
-                    // OJO ACA
-                    // Falta la impresión de todos los datos
-                    let horaActual = moment(fechaActual).format('HH:mm');
-                    
-                    // Impresion
-                    climaActual.innerHTML += imprimir(0, horaActual, tempConsulta, precipitacion);
+                // Impresión de resutlados
+                if (fecha == fechaActual) climaActual.innerHTML += imprimir(0, horaActual, temperaturaAmbiente, sensacionTermica, precipitacionFormatted, velocidadViento);
+                else if (mismoDia(fecha) == true) climaHorasPosteriores.innerHTML += imprimir(idx, fechaFormatted, temperaturaAmbiente, sensacionTermica, precipitacionFormatted, velocidadViento);
+                else if (/* Es una fecha posterior, imprimir una sola vez el promedio de valores del clima */) {
+                    // let climaPosterior = Posteriores();
+                    climaDiasPosteriores.innerHTML += imprimir(idx, climaPosterior[0], climaPosterior[1], climaPosterior[2], climaPosterior[3], climaPosterior[4]);    
                 }
-                else climasPosteriores.innerHTML += imprimir(idx, fechaConsulta, tempConsulta, precipitacion);
             }
         }) 
     });
@@ -71,4 +91,4 @@ function recorrerAPI() {
 
 
 // Llamado a funciones
-recorrerAPI();
+consultaAPI();
