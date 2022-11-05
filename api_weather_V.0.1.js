@@ -41,6 +41,5 @@ function recorrerAPI() {
 }
 
 
-
 // Llamado a funciones
 recorrerAPI();
