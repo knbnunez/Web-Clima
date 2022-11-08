@@ -1,10 +1,19 @@
-i {
-    font-size: 100px;
-    color: darkslategrey;
-    margin: 30px;
+body {
+    background: #05001a;
+    margin: 2%;
 }
 
-img {
-    width: 170px;
-    margin: 10px;
+/* OJO QUE AHORA MISMO LA PÁGINA NO ES RESPONSIVE... */
+
+
+
+.card {
+    background: radial-gradient(57.28% 55.37% at 18.41% 50%, #1E43A8 22.71%, rgba(61, 93, 205, 0.43) 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
+    mix-blend-mode: screen;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 40px;
+}
+
+#precipitacionTextoID {
+    border-bottom: 1px solid white;
 }
