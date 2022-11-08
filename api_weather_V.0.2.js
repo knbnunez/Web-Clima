@@ -3,18 +3,22 @@
 
 
 
-function imprimirCard1(diaHoraActual, temperaturaAmbiente, sensacionTermica, precipitacionFormatted, velocidadViento) {
+function imprimirCards(diaHoraActual, temperaturaAmbiente, sensacionTermica, precipitacionFormatted, velocidadViento) {
     precipitacionActualIconoID.innerHTML = `<img src="${precipitacionFormatted[0]}">`;
     temperaturaAmbienteActualID.innerHTML = `<h3>${temperaturaAmbiente} °C</h3>`;
     precipitacionActualTextoID.innerHTML = `<h4>${precipitacionFormatted[1]}</h4>`;
     diaHoraActualID.innerHTML = `${diaHoraActual}`;
     // 
-    sensacionTermicaActualID = `<h3>${sensacionTermica} °C</h3>`;
+    sensacionTermicaActualID.innerHTML = `<h4>${sensacionTermica} °C</h4>`;
     //
-    velocidadVientoActualID = `<h3>${velocidadViento} Km/h</h3>`;
+    velocidadVientoActualID.innerHTML = `<h4>${velocidadViento} Km/h</h4>`;
 }
 
-
+function imprimirTabla(fechaFormatted, temperaturaAmbiente, precipitacionFormatted, velocidadViento) {
+    imprimirTabla.innerHTML += `
+        <h4>${velocidadViento} Km/h</h4>
+    `;
+}
 
 
 
@@ -85,11 +89,14 @@ function consultaAPI() {
                 
                 // Formatearlos para la vista
                 let fechaFormatted = moment(fecha).format('MM-DD HH:mm');
+                // Trae texto y una imágen
                 let precipitacionFormatted = formatearPrecipitacion(precipitacion);
 
                 // Impresión de resutlados
-                if (fecha == fechaActual) imprimirCard1(diaHoraActual, temperaturaAmbiente, sensacionTermica, precipitacionFormatted, velocidadViento);
-                else if (mismoDia(fecha) == true) {}//climaHorasPosteriores.innerHTML += imprimir(idx, fechaFormatted, temperaturaAmbiente, sensacionTermica, precipitacionFormatted, velocidadViento);
+                if (fecha == fechaActual) imprimirCards(diaHoraActual, temperaturaAmbiente, sensacionTermica, precipitacionFormatted, velocidadViento);
+                else if (mismoDia(fecha) == true) {
+                    imprimirTabla(fechaFormatted, temperaturaAmbiente, precipitacionFormatted, velocidadViento);
+                }//climaHorasPosteriores.innerHTML += imprimir(idx, fechaFormatted, temperaturaAmbiente, sensacionTermica, precipitacionFormatted, velocidadViento);
                 else {
                     diaPosterior = {
                         time: clima.hourly.time[idx],

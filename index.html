@@ -19,8 +19,9 @@
 <body>
 
     <div class="container text-center">
+        
+        <!-- Clima actual -->
         <div class="row">
-            
             <div class="col-4">
                 <div class="card">
                     <!-- Ver de qué manera se pueden acomodar mejor dentro de la card. Con un row se expanden demasiado -->
@@ -53,8 +54,37 @@
                     </div>
                 </div>
             </div>
-        
         </div>
+        <!-- End Clima actual -->
+
+        <!-- Clima horas siguientes -->
+        <div class="row">
+            <div class="card">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <div class="col-3"><h4>Pronóstico extendido</h4></div>
+                        </tr>
+                        <tr>
+                            <div class="col-3"><img src="sources/ubicacion.png" style="width: 3%">  Ushuaia, TDF</div>
+                        </tr>
+                        <tr>
+                            <th><img src="sources/reloj.png" style="width: 25%"></th>
+                            <th></th>
+                            <th>Temp</th>
+                            <th>Precip</th>
+                            <th><img src="sources/sensacion-termica.png" style="width: 25%"></th>
+                            <th><img src="sources/velocidad-viento.png" style="width: 25%"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- End Clima horas siguientes -->
+
     </div>
 
 
