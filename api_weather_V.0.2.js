@@ -19,7 +19,7 @@ function imprimirTabla(fechaFormatted, precipitacionFormatted, temperaturaAmbien
     tabla.innerHTML += `
         <tr> 
             <td><h6>${fechaFormatted}</h6><td>
-            <td><img src="${precipitacionFormatted[0]}" style=""><td>
+            <td><img src="${precipitacionFormatted[0]}"><td>
             <td><h6>${temperaturaAmbiente} °C</h6><td>
             <td><h6>${precipitacionFormatted[1]}</h6><td>
             <td><h6>${sensacionTermica} °C</h6><td>
@@ -33,18 +33,18 @@ function imprimirDiasSiguientes(avgPrecipitacion, avgTemperaturaAmbiente, avgSen
     cardSiguientes.innerHTML += `
         <div class="col-4">
             <div class="card">
-                <div><img src="${avgPrecipitacion[0]}" style=""></div>
+                <div><img src="${avgPrecipitacion[0]}"></div>
                 <div><h3>${avgTemperaturaAmbiente} °C</h3></div>
                 <div><h4>${avgPrecipitacion[1]}</h4></div>
                 <!-- Linea divisora -->
-                <div><img src="sources/sensacion-termica.png" style="width: 5%"><span>${avgSensacionTermica} °C</span></div>
+                <div><img src="sources/sensacion-termica.png"><span>${avgSensacionTermica} °C</span></div>
                 <div><h4>Sensación térmica</h4></div>
                 <!-- Linea divisora -->
-                <div><img src="sources/velocidad-viento.png" style="width: 5%"><span>${avgVelocidadViento} Km/h</span></div>
+                <div><img src="sources/velocidad-viento.png"><span>${avgVelocidadViento} Km/h</span></div>
                 <div><h4>Velocidad del viento</h4></div>
                 <!-- Linea divisora -->
-                <div><img src="sources/ubicacion.png" style="width: 4%">  Ushuaia, TDF</div>
-                <div><img src="sources/reloj.png" style="width: 4%">${dia}</div>
+                <div><img src="sources/ubicacion.png">  Ushuaia, TDF</div>
+                <div><img src="sources/reloj.png">${dia}</div>
             </div>
         </div>
     `;
