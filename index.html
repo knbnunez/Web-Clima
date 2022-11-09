@@ -37,20 +37,29 @@
             <div class="col-8">
                 <div class="container text-center">
                     <div class="row">
-                        <div class="col-4">
-                            <div class="card">
-                                <div><img src="sources/sensacion-termica.png" style="width: 50%"></div>
-                                <div><h4>Sensación térmica</h4></div>
-                                <div id="sensacionTermicaActualID"></div>
+
+                        <div class="card">
+                            
+                            <div class="row">
+                                
+                                <div class="col-4">
+                                    <div class="card">
+                                        <div><img src="sources/sensacion-termica.png" style="width: 50%"></div>
+                                        <div><h4>Sensación térmica</h4></div>
+                                        <div id="sensacionTermicaActualID"></div>
+                                    </div>
+                                </div>
+                                <div class="col-4">
+                                    <div class="card">
+                                        <div><img src="sources/velocidad-viento.png" style="width: 50%"></div>
+                                        <div><h4>Velocidad del viento</h4></div>
+                                        <div id="velocidadVientoActualID"></div>
+                                    </div>
+                                </div>
+                            
                             </div>
+                        
                         </div>
-                        <div class="col-4">
-                            <div class="card">
-                                <div><img src="sources/velocidad-viento.png" style="width: 50%"></div>
-                                <div><h4>Velocidad del viento</h4></div>
-                                <div id="velocidadVientoActualID"></div>
-                            </div>
-                        </div>        
                     </div>
                 </div>
             </div>
@@ -71,10 +80,10 @@
                         <tr>
                             <th><img src="sources/reloj.png" style="width: 25%"></th>
                             <th></th>
-                            <th>Temp</th>
-                            <th>Precip</th>
-                            <th><img src="sources/sensacion-termica.png" style="width: 25%"></th>
-                            <th><img src="sources/velocidad-viento.png" style="width: 25%"></th>
+                            <th><h5>Temp</h5></th>
+                            <th><h5>Precip</h5></th>
+                            <th><img src="sources/sensacion-termica.png" style="width: 15%"></th>
+                            <th><img src="sources/velocidad-viento.png" style="width: 10%"></th>
                         </tr>
                     </thead>
                     <tbody id="tabla">
@@ -85,8 +94,27 @@
         </div>
         <!-- End Clima horas siguientes -->
 
-    </div>
+        <!-- Clima días siguientes -->
+        <div id="cardSiguientes" class="row">
+            <!-- contenido -->
+        </div>
+        <!-- <div class="row"> -->
+            <!-- <div class="col-4"> -->
+                <!-- <div class="card"> -->
+                    <!-- Ver de qué manera se pueden acomodar mejor dentro de la card. Con un row se expanden demasiado -->
+                    <!-- <div id="precipitacionActualIconoID"></div> -->
+                    <!-- <div id="temperaturaAmbienteActualID"></div> -->
+                    <!-- <div id="precipitacionActualTextoID"></div> -->
+                    <!-- Linea divisora -->
+                    <!-- <div><img src="sources/ubicacion.png" style="width: 3%">  Ushuaia, TDF</div> -->
+                    <!-- <div><img src="sources/calendario.png" style="width: 4%">  <span id="diaHoraActualID"></span></div> -->
+                <!-- </div> -->
+            <!-- </div> -->
+        <!-- </div> -->
+        <!-- Clima días siguientes -->
 
+    </div>
+    
 
     <img src="" alt="">
 

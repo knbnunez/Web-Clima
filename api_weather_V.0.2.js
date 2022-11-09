@@ -14,9 +14,39 @@ function imprimirCards(diaHoraActual, temperaturaAmbiente, sensacionTermica, pre
     velocidadVientoActualID.innerHTML = `<h4>${velocidadViento} Km/h</h4>`;
 }
 
-function imprimirTabla(fechaFormatted, temperaturaAmbiente, precipitacionFormatted, velocidadViento) {
-    imprimirTabla.innerHTML += `
-        <h4>${velocidadViento} Km/h</h4>
+function imprimirTabla(fechaFormatted, precipitacionFormatted, temperaturaAmbiente, sensacionTermica, velocidadViento) {
+    console.log('Entré a imripmir tabla');
+    tabla.innerHTML += `
+        <tr> 
+            <td><h6>${fechaFormatted}</h6><td>
+            <td><img src="${precipitacionFormatted[0]}" style=""><td>
+            <td><h6>${temperaturaAmbiente} °C</h6><td>
+            <td><h6>${precipitacionFormatted[1]}</h6><td>
+            <td><h6>${sensacionTermica} °C</h6><td>
+            <td><h6>${velocidadViento} Km/h</h6><td>
+        </tr>
+    `;
+}
+
+function imprimirDiasSiguientes(avgPrecipitacion, avgTemperaturaAmbiente, avgSensacionTermica, avgVelocidadViento, dia) {
+    console.log('Entré a imprimir días siguientes');
+    cardSiguientes.innerHTML += `
+        <div class="col-4">
+            <div class="card">
+                <div><img src="${avgPrecipitacion[0]}" style=""></div>
+                <div><h3>${avgTemperaturaAmbiente} °C</h3></div>
+                <div><h4>${avgPrecipitacion[1]}</h4></div>
+                <!-- Linea divisora -->
+                <div><img src="sources/sensacion-termica.png" style="width: 5%"><span>${avgSensacionTermica} °C</span></div>
+                <div><h4>Sensación térmica</h4></div>
+                <!-- Linea divisora -->
+                <div><img src="sources/velocidad-viento.png" style="width: 5%"><span>${avgVelocidadViento} Km/h</span></div>
+                <div><h4>Velocidad del viento</h4></div>
+                <!-- Linea divisora -->
+                <div><img src="sources/ubicacion.png" style="width: 4%">  Ushuaia, TDF</div>
+                <div><img src="sources/reloj.png" style="width: 4%">${dia}</div>
+            </div>
+        </div>
     `;
 }
 
@@ -67,8 +97,10 @@ function formatearPrecipitacion(precipitacion) {
     else return ["sources/lluvias-torrenciales.png", "lluvias torrenciales"];
 }
 
-function mismoDia(fecha) {
+function mismoDia(fecha, idx) {
+    // console.log('Estoy entrando a mismoDia'+idx);
     let dia = moment(fecha).format('MM-DD');
+    // console.log('Fecha: '+fecha+'; Dia: '+dia+'; Dia actual: '+diaActual);
     return (dia == diaActual? true: false);
 }
 
@@ -94,8 +126,9 @@ function consultaAPI() {
 
                 // Impresión de resutlados
                 if (fecha == fechaActual) imprimirCards(diaHoraActual, temperaturaAmbiente, sensacionTermica, precipitacionFormatted, velocidadViento);
-                else if (mismoDia(fecha) == true) {
-                    imprimirTabla(fechaFormatted, temperaturaAmbiente, precipitacionFormatted, velocidadViento);
+                else if (mismoDia(fecha, idx) == true) {
+                    // console.log('Cuantas veces entro acá?: '+idx);
+                    imprimirTabla(fechaFormatted, precipitacionFormatted, temperaturaAmbiente, sensacionTermica, velocidadViento);
                 }//climaHorasPosteriores.innerHTML += imprimir(idx, fechaFormatted, temperaturaAmbiente, sensacionTermica, precipitacionFormatted, velocidadViento);
                 else {
                     diaPosterior = {
@@ -124,7 +157,7 @@ function consultaAPI() {
                 avgPrecipitacion += dataHora.precipitation;
                 avgVelocidadViento += dataHora.windspeed_10m;
                 if (j == 23) {
-                    var dia = moment(dataHora.time).format('MM-DD');
+                    var dia = moment(dataHora.time).format('YYYY-MM-DD');
                     avgTemperaturaAmbiente = (avgTemperaturaAmbiente/24).toFixed(2);
                     avgSensacionTermica =  (avgSensacionTermica/24).toFixed(2);
                     avgPrecipitacion =  (avgPrecipitacion/24).toFixed(2);
@@ -132,6 +165,8 @@ function consultaAPI() {
                 }
             }
             // climaDiasPosteriores.innerHTML += imprimir(i, dia, avgTemperaturaAmbiente, avgSensacionTermica, avgPrecipitacion, avgVelocidadViento);    
+            avgPrecipitacion = formatearPrecipitacion(avgPrecipitacion);
+            imprimirDiasSiguientes(avgPrecipitacion, avgTemperaturaAmbiente, avgSensacionTermica, avgVelocidadViento, dia);
         }
         
     });
