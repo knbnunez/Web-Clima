@@ -11,7 +11,6 @@ function imprimirCards(diaHoraActual, temperaturaAmbiente, sensacionTermica, pre
 }
 
 function imprimirTabla(fechaFormatted, precipitacionFormatted, temperaturaAmbiente, sensacionTermica, velocidadViento) {
-    console.log('Entré a imripmir tabla');
     tabla.innerHTML += `
         <tr> 
             <th scope="row"><h5>${fechaFormatted}</h5></th>
