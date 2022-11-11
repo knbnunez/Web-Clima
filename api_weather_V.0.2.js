@@ -5,8 +5,9 @@
 
 function imprimirCards(diaHoraActual, temperaturaAmbiente, sensacionTermica, precipitacionFormatted, velocidadViento) {
     precipitacionActualIconoID.innerHTML = `<img src="${precipitacionFormatted[0]}">`;
-    temperaturaAmbienteActualID.innerHTML = `<h3>${temperaturaAmbiente} °C</h3>`;
-    precipitacionActualTextoID.innerHTML = `<h4>${precipitacionFormatted[1]}</h4>`;
+    temperaturaAmbienteActualID.innerHTML = `${temperaturaAmbiente} °C`;
+    precipitacionActualTextoID.innerHTML = `${precipitacionFormatted[1]}`;
+    // -
     diaHoraActualID.innerHTML = `${diaHoraActual}`;
     // 
     sensacionTermicaActualID.innerHTML = `<h4>${sensacionTermica} °C</h4>`;
@@ -16,58 +17,47 @@ function imprimirCards(diaHoraActual, temperaturaAmbiente, sensacionTermica, pre
 
 function imprimirTabla(fechaFormatted, precipitacionFormatted, temperaturaAmbiente, sensacionTermica, velocidadViento) {
     console.log('Entré a imripmir tabla');
+    // tabla.innerHTML += `
+    //     <div class="row"> 
+    //         <div class="col"><h5>${fechaFormatted}</h5></div>
+    //         <div class="col"><img src="${precipitacionFormatted[0]}" style="width: 50%"></div>
+    //         <div class="col"><h5>${temperaturaAmbiente} °C</h5></div>
+    //         <div class="col"><h5>${precipitacionFormatted[1]}</h6></div>
+    //         <div class="col"><h5>${sensacionTermica} °C</h5></div>
+    //         <div class="col"><h5>${velocidadViento} Km/h</h5></div>
+    //     </div>
+    // `;
     tabla.innerHTML += `
         <tr> 
-            <td><h6>${fechaFormatted}</h6><td>
-            <td><img src="${precipitacionFormatted[0]}"><td>
-            <td><h6>${temperaturaAmbiente} °C</h6><td>
-            <td><h6>${precipitacionFormatted[1]}</h6><td>
-            <td><h6>${sensacionTermica} °C</h6><td>
-            <td><h6>${velocidadViento} Km/h</h6><td>
-        </tr>
+            <th scope="row"><h5>${fechaFormatted}</h5></th>
+            <td><img src="${precipitacionFormatted[0]}" style="width: 20%"></td>
+            <td><h5>${temperaturaAmbiente} °C</h5></td>
+            <td><h5>${precipitacionFormatted[1]}</h6></td>
+            <td><h5>${sensacionTermica} °C</h5></td>
+            <td><h5>${velocidadViento} Km/h</h5></td>
+        </td>
     `;
 }
 
 function imprimirDiasSiguientes(avgPrecipitacion, avgTemperaturaAmbiente, avgSensacionTermica, avgVelocidadViento, dia) {
     console.log('Entré a imprimir días siguientes');
-    cardSiguientes.innerHTML += `
-        <div class="col-4">
-            <div class="card">
-                <div><img src="${avgPrecipitacion[0]}"></div>
-                <div><h3>${avgTemperaturaAmbiente} °C</h3></div>
-                <div><h4>${avgPrecipitacion[1]}</h4></div>
-                <!-- Linea divisora -->
-                <div><img src="sources/sensacion-termica.png"><span>${avgSensacionTermica} °C</span></div>
-                <div><h4>Sensación térmica</h4></div>
-                <!-- Linea divisora -->
-                <div><img src="sources/velocidad-viento.png"><span>${avgVelocidadViento} Km/h</span></div>
-                <div><h4>Velocidad del viento</h4></div>
-                <!-- Linea divisora -->
-                <div><img src="sources/ubicacion.png">  Ushuaia, TDF</div>
-                <div><img src="sources/reloj.png">${dia}</div>
-            </div>
+    ult_row.innerHTML += `
+        <div class="col">
+            <img src="${avgPrecipitacion[0]}" style="width: 40%">
+            <p>${avgTemperaturaAmbiente} °C</p>
+            <p>${avgPrecipitacion[1]}</p>
+            <!-- Linea divisora -->
+            <img src="sources/sensacion-termica.png" style="width: 40%"><span>${avgSensacionTermica} °C</span>
+            <p>Sensación térmica</p>
+            <!-- Linea divisora -->
+            <img src="sources/velocidad-viento.png" style="width: 40%"><span>${avgVelocidadViento} Km/h</span>
+            <p>Velocidad del viento</p>
+            <!-- Linea divisora -->
+            <img src="sources/ubicacion.png" style="width: 5%">  Ushuaia, TDF
+            <img src="sources/reloj.png" style="width: 5%">${dia}
         </div>
     `;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 let fechaOrigen = new Date();
