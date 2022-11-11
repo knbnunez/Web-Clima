@@ -60,10 +60,8 @@ function formatearPrecipitacion(precipitacion) {
     else return ["sources/lluvias-torrenciales.png", "Lluvias torrenciales"];
 }
 
-function mismoDia(fecha, idx) {
-    // console.log('Estoy entrando a mismoDia'+idx);
+function mismoDia(fecha) {
     let dia = moment(fecha).format('MM-DD');
-    // console.log('Fecha: '+fecha+'; Dia: '+dia+'; Dia actual: '+diaActual);
     return (dia == diaActual? true: false);
 }
 
@@ -72,11 +70,12 @@ function consultaAPI() {
     .then(response => response.json()) 
     .then(clima => {
         let posteriores = [];
+
         // Imprimir actuales
         clima.hourly.time.forEach((fecha, idx) => {
             if (clima.hourly.time[idx] >= fechaActual) {
+                
                 // Obtener los datos útiles de la consulta
-                // let fecha = clima.hourly.time[idx];
                 let temperaturaAmbiente = clima.hourly.temperature_2m[idx];
                 let sensacionTermica = clima.hourly.apparent_temperature[idx];
                 let precipitacion = clima.hourly.precipitation[idx];
@@ -89,10 +88,9 @@ function consultaAPI() {
 
                 // Impresión de resutlados
                 if (fecha == fechaActual) imprimirCards(diaHoraActual, temperaturaAmbiente, sensacionTermica, precipitacionFormatted, velocidadViento);
-                else if (mismoDia(fecha, idx) == true) {
-                    // console.log('Cuantas veces entro acá?: '+idx);
-                    imprimirTabla(fechaFormatted, precipitacionFormatted, temperaturaAmbiente, sensacionTermica, velocidadViento);
-                }//climaHorasPosteriores.innerHTML += imprimir(idx, fechaFormatted, temperaturaAmbiente, sensacionTermica, precipitacionFormatted, velocidadViento);
+                
+                else if (mismoDia(fecha) == true) imprimirTabla(fechaFormatted, precipitacionFormatted, temperaturaAmbiente, sensacionTermica, velocidadViento);
+                
                 else {
                     horaDiaPosterior = {
                         time: clima.hourly.time[idx],
@@ -104,9 +102,9 @@ function consultaAPI() {
                     posteriores.push(horaDiaPosterior);
                 }
             }
-        }) 
+        }); 
 
-        // Imprimir posteriores
+        // Promediar valores posteriores
         for (let i = 0; i < 6; i++) {
             let avgTemperaturaAmbiente = new Number();
             let avgSensacionTermica = new Number();
