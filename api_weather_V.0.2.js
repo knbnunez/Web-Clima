@@ -4,7 +4,7 @@
 
 
 function imprimirCards(diaHoraActual, temperaturaAmbiente, sensacionTermica, precipitacionFormatted, velocidadViento) {
-    precipitacionActualIconoID.innerHTML = `<img src="${precipitacionFormatted[0]}">`;
+    precipitacionActualIconoID.innerHTML = `<img src="${precipitacionFormatted[0]}" style="width: 60%; margin-top: 15px">`;
     temperaturaAmbienteActualID.innerHTML = `${temperaturaAmbiente} °C`;
     precipitacionActualTextoID.innerHTML = `${precipitacionFormatted[1]}`;
     // -
@@ -17,16 +17,6 @@ function imprimirCards(diaHoraActual, temperaturaAmbiente, sensacionTermica, pre
 
 function imprimirTabla(fechaFormatted, precipitacionFormatted, temperaturaAmbiente, sensacionTermica, velocidadViento) {
     console.log('Entré a imripmir tabla');
-    // tabla.innerHTML += `
-    //     <div class="row"> 
-    //         <div class="col"><h5>${fechaFormatted}</h5></div>
-    //         <div class="col"><img src="${precipitacionFormatted[0]}" style="width: 50%"></div>
-    //         <div class="col"><h5>${temperaturaAmbiente} °C</h5></div>
-    //         <div class="col"><h5>${precipitacionFormatted[1]}</h6></div>
-    //         <div class="col"><h5>${sensacionTermica} °C</h5></div>
-    //         <div class="col"><h5>${velocidadViento} Km/h</h5></div>
-    //     </div>
-    // `;
     tabla.innerHTML += `
         <tr> 
             <th scope="row"><h5>${fechaFormatted}</h5></th>
@@ -42,19 +32,19 @@ function imprimirTabla(fechaFormatted, precipitacionFormatted, temperaturaAmbien
 function imprimirDiasSiguientes(avgPrecipitacion, avgTemperaturaAmbiente, avgSensacionTermica, avgVelocidadViento, dia) {
     console.log('Entré a imprimir días siguientes');
     ult_row.innerHTML += `
-        <div class="col">
-            <img src="${avgPrecipitacion[0]}" style="width: 40%">
-            <p>${avgTemperaturaAmbiente} °C</p>
-            <p>${avgPrecipitacion[1]}</p>
+        <div class="col cards-siguientes">
+            <div><img src="${avgPrecipitacion[0]}" style="width: 40%"></div>
+            <div><p>${avgTemperaturaAmbiente} °C</p></div>
+            <div><p>${avgPrecipitacion[1]}</p></div>
             <!-- Linea divisora -->
-            <img src="sources/sensacion-termica.png" style="width: 40%"><span>${avgSensacionTermica} °C</span>
-            <p>Sensación térmica</p>
+            <div><img src="sources/sensacion-termica.png" style="width: 40%"><span>${avgSensacionTermica} °C</span></div>
+            <div><p>Sensación térmica</p></div>
             <!-- Linea divisora -->
-            <img src="sources/velocidad-viento.png" style="width: 40%"><span>${avgVelocidadViento} Km/h</span>
-            <p>Velocidad del viento</p>
+            <div><img src="sources/velocidad-viento.png" style="width: 40%"><span>${avgVelocidadViento} Km/h</span></div>
+            <div><p>Velocidad del viento</p></div>
             <!-- Linea divisora -->
-            <img src="sources/ubicacion.png" style="width: 5%">  Ushuaia, TDF
-            <img src="sources/reloj.png" style="width: 5%">${dia}
+            <div><img src="sources/ubicacion.png" style="width: 5%">  Ushuaia, TDF</div>
+            <div><img src="sources/reloj.png" style="width: 5%">${dia}</div>
         </div>
     `;
 }
@@ -79,12 +69,12 @@ fetch(apiWeather)
 
 
 function formatearPrecipitacion(precipitacion) {
-    if (precipitacion == 0) return ["sources/despejado.png", "despejado"];
-    else if (precipitacion < 2) return ["sources/lluvias-debiles.png", "lluvias débiles"];
+    if (precipitacion == 0) return ["sources/despejado.png", "Despejado"];
+    else if (precipitacion < 2) return ["sources/lluvias-debiles.png", "Lluvias débiles"];
     else if (precipitacion <= 15) return ["sources/lluvia.png", "lluvia"];
-    else if (precipitacion <= 30) return ["sources/lluvias-fuertes.png", "lluvias fuertes"]; 
-    else if (precipitacion <= 60) return ["sources/lluvias-muy-fuertes.png", "lluvias muy fuertes"];
-    else return ["sources/lluvias-torrenciales.png", "lluvias torrenciales"];
+    else if (precipitacion <= 30) return ["sources/lluvias-fuertes.png", "Lluvias fuertes"]; 
+    else if (precipitacion <= 60) return ["sources/lluvias-muy-fuertes.png", "Lluvias muy fuertes"];
+    else return ["sources/lluvias-torrenciales.png", "Lluvias torrenciales"];
 }
 
 function mismoDia(fecha, idx) {

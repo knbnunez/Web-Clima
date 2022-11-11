@@ -19,44 +19,54 @@
 
     <div class="container-fluid">
         <div class="container-fluid">
-            <div class="row text-center">
-                <div class="col m-4">
-                    <!-- <div class="card"> -->
+            <div class="row">
+                <div class="col">
+                    <div class="card">
+                    <!-- <div id="rectangulo"> -->
                         <div id="precipitacionActualIconoID" class="text-center"></div>
-                        <!-- <div class="card-body"> -->
-                        <h4 id="temperaturaAmbienteActualID"></h4>
-                        <h4 id="precipitacionActualTextoID"></h4>
-                        <img src="sources/ubicacion.png">  Ushuaia, TDF <br>
-                        <img src="sources/calendario.png"><span id="diaHoraActualID"></span>
-                        <!-- </div> -->
-                    <!-- </div> -->
+                        <div class="card-body">
+                            
+                            <div><h5 id="temperaturaAmbienteActualID"></h5></div>
+                            <div><h5 id="precipitacionActualTextoID"></h5></div>
+                            <div><img src="sources/ubicacion.png" style="width: 5%">  Ushuaia, TDF</div>
+                            <div><img src="sources/calendario.png" style="width: 5%"> <span id="diaHoraActualID"></span></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col m-4">
-                    <!-- <div class="card"> -->
-                        <div class="text-center"><img src="sources/sensacion-termica.png" style="width: 40%"></div>
-                        <div><h4>Sensación térmica</h4></div>
-                        <div id="sensacionTermicaActualID"></div>
-                        <br><br><br><br>
-                    <!-- </div> -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-image">
+                            <div class="text-center"><img src="sources/sensacion-termica.png" style="width: 40%; margin-top: 50px;"></div>
+                        </div>
+                        <div class="card-body" style="margin-top: 93px">
+                            <div><h5>Sensación térmica</h5></div>
+                            <div id="sensacionTermicaActualID"></div>
+                            
+                        </div>
+                    </div>
                 </div>
-                <div class="col m-4">
-                    <!-- <div class="card"> -->
-                        <div class="text-center"><img src="sources/velocidad-viento.png" style="width: 40%"></div>
-                        <div><h4>Velocidad del viento</h4></div>
-                        <div id="velocidadVientoActualID"></div>
-                    <!-- </div> -->
+                <div class="col">
+                    <div class="card">
+                        <div class="card-image">
+                            <div class="text-center"><img src="sources/velocidad-viento.png" style="width: 40%; margin-top: 50px;"></div>
+                        </div>
+                        <div class="card-body" style="margin-top: 100px">
+                            <div><h5>Velocidad del viento</h5></div>
+                            <div id="velocidadVientoActualID"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="container-fluid">
             <div class="row text-center">
                
-                <div class="col" style="text-align: left;">
-                    <h4>Pronóstico extendido</h4>
+                <div id="row-encima-tabla" class="col" style="text-align: left;">
+                    <h5>Pronóstico extendido</h5>
                     <img src="sources/ubicacion.png">  Ushuaia, TDF
                 </div>
                     
-                <table class="table align-middle">
+                <table class="table align-middle" style="color: white">
                     <thead>
                         <tr>
                             <th scope="col"><img src="sources/reloj.png" style="width: 20%;"></th>
