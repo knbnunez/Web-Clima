@@ -12,7 +12,7 @@ body {
     box-sizing: content-box;
     height: 350px;
     width: 300px;
-    background: radial-gradient(57.28% 55.37% at 18.41% 50%, #1E43A8 22.71%, rgba(61, 93, 205, 0.43) 100%);
+    background: linear-gradient(226.55deg, #030B21 4.51%, rgba(21, 41, 109, 0.47) 17.85%, rgba(32, 56, 140, 0.47) 48.83%, #000000 96.01%);
 }
 
 #row-encima-tabla {
@@ -20,18 +20,18 @@ body {
     padding-top: 20px;
     padding-left: 33px;
     padding-bottom: 18px;
-    background: linear-gradient(226.55deg, #030B21 4.51%, rgba(21, 41, 109, 0.47) 17.85%, rgba(32, 56, 140, 0.47) 48.83%, #1E43A8 96.01%);
+    background: linear-gradient(226.55deg, #030B21 4.51%, rgba(21, 41, 109, 0.47) 17.85%, rgba(32, 56, 140, 0.47) 48.83%, #000000 96.01%);
 }
 
 table {
-    background: radial-gradient(57.28% 55.37% at 18.41% 50%, #1E43A8 22.71%, rgba(61, 93, 205, 0.43) 100%);
+    background: linear-gradient(226.55deg, #030B21 4.51%, rgba(21, 41, 109, 0.47) 17.85%, rgba(32, 56, 140, 0.47) 48.83%, #000000 96.01%);
     text-decoration: #FFFFFF;
     /* border: 1px solid rgba(38, 58, 130, 0.43); */
 }
 
 #ult_row {
     margin-top: 22px;
-    background: radial-gradient(57.28% 55.37% at 18.41% 50%, #1E43A8 22.71%, rgba(61, 93, 205, 0.43) 100%);
+    background: linear-gradient(226.55deg, #030B21 4.51%, rgba(21, 41, 109, 0.47) 17.85%, rgba(32, 56, 140, 0.47) 48.83%, #000000 96.01%);
     /* border: 1px solid; */
 } 
 

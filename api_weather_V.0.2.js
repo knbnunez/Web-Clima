@@ -44,7 +44,7 @@ function imprimirDiasSiguientes(avgPrecipitacion, avgTemperaturaAmbiente, avgSen
             <div><p>Velocidad del viento</p></div>
             <!-- Linea divisora -->
             <div><img src="sources/ubicacion.png" style="width: 5%">  Ushuaia, TDF</div>
-            <div><img src="sources/reloj.png" style="width: 5%">${dia}</div>
+            <div><img src="sources/reloj.png" style="width: 5%"> ${dia}</div>
         </div>
     `;
 }
